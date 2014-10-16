@@ -1,0 +1,61 @@
+﻿@model PartyInvites.Models.GuestResponse
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-theme.css"/>
+    <title>RsvpForm</title>
+</head>
+<body>
+
+    <div class="panel panel-success">
+        <div class="panel-heading text-center">
+            <h4>RSVP</h4>
+        </div>
+        <div class="panel-body">
+
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+                
+                <div class="form-group">
+                    <label>Your Name</label>
+                    @Html.TextBoxFor(m => m.name, new {@class = "form-control"})
+                    <label>Your Email</label>
+                    @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+                    <label>Your Phone</label>
+                    @Html.TextBoxFor(m => m.phone, new { @class = "form-control"})
+                    <label>Will you attend</label>
+                    @Html.DropDownListFor(m => m.willattend, new[] { new SelectListItem() { Text = "Yes, Ill be there", Value = bool.TrueString }, new SelectListItem() { Text = "No, I will not", Value = bool.FalseString } }, new { @class="form-control"})
+                </div>
+
+                <input class="btn btn-success" type="submit" value="Submit RSVP" />
+            }
+
+        </div>
+    </div>
+
+    <!--Old form without bootstrap styling-->
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <p>Your name  : @Html.TextBoxFor(m => m.name)</p>
+        <p>Your Email : @Html.TextBoxFor(m => m.email)</p>
+        <p>Your Phone : @Html.TextBoxFor(m => m.phone)</p>
+        
+        <p>Will you attend ? 
+            @Html.DropDownListFor(m => m.willattend, new[] { new SelectListItem() { Text = "Yes, Ill be there", Value = bool.TrueString}, new SelectListItem(){Text = "No, I will not", Value = bool.FalseString} })
+        </p>
+        
+        <input type="submit" value="Submit RSVP" />
+    }
+</body>
+</html>
